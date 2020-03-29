@@ -1,0 +1,94 @@
+C#企业级开发技术练习4答题卡
+
+班级：     
+姓名：     
+学号：     
+
+注：请将答案放置在序号下方。*/
+
+（一）
+using System;
+using System.Numerics;
+
+namespace 练习
+
+{
+    class Program
+    {
+        static BigInteger Tota1Mu1(long begin, long over)
+        {
+            BigInteger r=1;
+            for (long i = begin; i <= over; i++)
+            {
+                r *= i;
+                i++;
+                i++;
+            }
+            return r;
+         }
+        static void Main(string[] args)
+        {
+            Func<long, long,BigInteger> Tota1M = Tota1Mu1;
+            Console.WriteLine(Tota1M(11, 23));
+        }
+    }
+    
+
+（二）
+using System;
+using System.Linq;
+
+namespace 练习
+
+{
+    delegate decimal TotalCalc(decimal[] x);
+    class Program
+    {
+        static void TotalC(string strC, decimal[] a, TotalCalc funC)
+        {
+            Console.WriteLine($"{strC}:{funC(a)}");
+        }
+        static void Main(string[] args)
+        {
+            decimal[] scs = { 80, 72, 91, 52, 65 };
+            TotalC("最大值", scs, delegate (decimal[] a)
+               {
+                   return a.Max();
+               });
+            TotalC("最小值", scs, delegate (decimal[] a)
+             {
+                 return a.Min();
+             });
+        }
+    }
+}
+
+（三）
+using System;
+
+namespace 练习
+
+{
+    delegate void AddDay(DateTiem dt, int day);
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Action<DateTime, int> DateChange = (t,d) =>
+               Console.WriteLine($"{t.Date.ToString()}" +
+               $",{d}天之前是{t.AddDays(-d).Date.ToString()}");
+            DateChange(new DateTime(2020, 10, 2), 5);
+
+        }
+    }
+}
+
+
+（四） isPass(scs, "及格人数", s =>
+              {
+                  int i = 0;
+                  foreach ( char a in scs)
+                  {
+                      if (scs[i]>60) i++;
+                  }
+                  return i;
